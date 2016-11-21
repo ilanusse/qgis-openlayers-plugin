@@ -33,6 +33,7 @@ from openlayers_plugin_layer_type import OpenlayersPluginLayerType
 from tools_network import getProxy
 from weblayers.weblayer_registry import WebLayerTypeRegistry
 from weblayers.google_maps import OlGooglePhysicalLayer, OlGoogleStreetsLayer, OlGoogleHybridLayer, OlGoogleSatelliteLayer
+from weblayers.baires_maps import OlBairesLayer
 from weblayers.osm import OlOpenStreetMapLayer, OlOpenCycleMapLayer, OlOCMLandscapeLayer, OlOCMPublicTransportLayer, OlOSMHumanitarianDataModelLayer
 from weblayers.bing_maps import OlBingRoadLayer, OlBingAerialLayer, OlBingAerialLabelledLayer
 from weblayers.apple_maps import OlAppleiPhotoMapLayer
@@ -78,6 +79,8 @@ class OpenlayersPlugin:
         QObject.connect(self._actionAbout, SIGNAL("triggered()"), self.dlgAbout, SLOT("show()"))
         #? self._actionAbout.triggered.connect(self.dlgAbout, SLOT("show()"))
         self._olMenu.addAction(self._actionAbout)
+
+        self._olLayerTypeRegistry.register(OlBairesLayer())
 
         self._olLayerTypeRegistry.register(OlGooglePhysicalLayer())
         self._olLayerTypeRegistry.register(OlGoogleStreetsLayer())

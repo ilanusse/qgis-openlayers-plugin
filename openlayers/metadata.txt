@@ -8,6 +8,7 @@ author=Sourcepole and contributors
 email=pka@sourcepole.ch
 
 changelog=1.4.1
+    - Added Baires Map!
     - Display warning for Google & Bing layers regarding printing and rotating
     - Fix UnicodeEncodeError at initialization
     - Spanish translation. Thanks to @ermati

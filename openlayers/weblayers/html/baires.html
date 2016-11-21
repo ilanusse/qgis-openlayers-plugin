@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>OpenLayer Baires Layer</title>
+    <link rel="stylesheet" href="qgis.css" type="text/css">
+    <link rel="stylesheet" href="google.css" type="text/css">
+    <script src="OpenLayers.js"></script>
+    <script src="OlOverviewMarker.js"></script>
+    <script type="text/javascript">
+
+        var oloMarker; // OpenLayer Overview Marker
+        var map;
+        var loadEnd;
+
+        function init() {
+            map = new OpenLayers.Map('map', {
+                adjustZoom: function(zoom) { return zoom; },
+                displayProjection: new OpenLayers.Projection("EPSG:4326"),
+                units: "m",
+                theme: null,
+                projection: new OpenLayers.Projection("EPSG:900913")
+            });
+            var baires = new OpenLayers.Layer.TMS(
+                "Baires Layer",
+                "http://tiles1.usig.buenosaires.gob.ar/mapcache/tms/", // service endpoint
+                { attribution: '<a href="//mapa.buenosaires.gob.ar/">USIG</a> (GCBA)', layername: "amba_con_transporte_3857@GoogleMapsCompatible", type: "png"}
+            );
+            baires.events.register("loadend", baires, function() {
+              loadEnd = true;
+            });
+
+            map.addLayer(baires);
+            map.setCenter(new OpenLayers.LonLat(-58.3900979,-34.604916),2);
+            oloMarker = new OlOverviewMarker(map, getPathUpper(document.URL) + '/x.png');
+        }
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="map"></div>
+  </body>
+</html>
